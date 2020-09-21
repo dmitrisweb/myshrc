@@ -1,0 +1,51 @@
+[color]
+    ui = auto
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+[color "status"]
+    added = green
+    changed = cyan
+    untracked = yellow
+[core]
+    autocrlf = input
+    excludesfile = /Users/dmitry/.gitignore_global
+    pager = less -X
+[alias]
+    lg1 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
+    lg2 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(bold white)— %an%C(reset)' --abbrev-commit
+    lg = log --pretty=format:"%C(auto)%h%x09%<(15)%an%x09%ad%x09%s" --date=short --date=local
+    stat = diff --stat=200,100
+    statlog = log --stat=200,100
+    taglist = for-each-ref --sort='*authordate' --format='%(objectname:short) %(taggerdate:short): %(tag)' refs/tags
+    co = checkout
+    diffspace = diff --ignore-all-space
+    audit = log -M --follow -p --ignore-all-space
+    leaderboard = !git log --pretty=format:"%an" | sort | uniq -c | sort -frn
+    ws-add = !sh -c 'git diff -w --no-color "$@" | git apply --cached --ignore-whitespace' -
+    ff = pull --ff-only
+    s = status -s
+    c = commit -m
+
+    # will reset all modified files!
+    cleanup = !git reset --hard && git clean -f
+
+    # Checkout to a base branch, pull and gelete working branch
+    rb = "!f(){ local BRANCH=$(git rev-parse --abbrev-ref HEAD); local TARGET=${1:-master}; git checkout $TARGET; git pull; git branch -d $BRANCH; }; f"
+
+    # Show the diff between the latest commit and the current state
+    d = !git status | grep '\t' | grep -v dist | grep -v media | grep -v .css | grep -v package-lock.json | grep -v 'deleted' | awk '{print $2}' | xargs git diff
+    # d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+
+[push]
+    default = current
+[merge]
+    conflictstyle = diff3
+[help]
+    autocorrect = 1
