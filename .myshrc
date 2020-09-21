@@ -1,0 +1,20 @@
+###### Configs ######
+
+# Set history file max size(lines)
+export HISTSIZE=10000000
+export HISTFILESIZE=10000000
+
+
+###### Aliases ######
+alias re='source ~/.zshrc'
+
+
+alias ag='ag --ignore dist --ignore "*.md" --ignore "*map" --ignore "*vendor*" --ignore node_modules --ignore bower_components --ignore build --ignore target --ignore stubs --ignore stub $1'
+
+
+###### Git ######
+
+alias gbb='fn () { local CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD); local BRANCH=${1:-master}; echo $CURRENT_BRANCH && git checkout $BRANCH && git fetch --all --prune && git pull origin $BRANCH && git branch -d $CURRENT_BRANCH; }; fn'
+
+alias chrome="open -a 'Google Chrome'"
+
