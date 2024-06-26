@@ -32,6 +32,7 @@
     ff = pull --ff-only
     s = status -s
     c = commit -m
+    ca = commit -a -m
 
     # will reset all modified files!
     cleanup = !git reset --hard && git clean -f
