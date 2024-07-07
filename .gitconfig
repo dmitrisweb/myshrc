@@ -33,6 +33,7 @@
     s = status -s
     c = commit -m
     ca = commit -a -m
+    p = push -u origin HEAD # pushing new branch to a remote
 
     # will reset all modified files!
     cleanup = !git reset --hard && git clean -f
